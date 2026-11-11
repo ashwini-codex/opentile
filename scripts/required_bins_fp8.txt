@@ -1,0 +1,7 @@
+fp8_zero
+fp8_subnormal
+fp8_normal
+fp8_max
+fp8_nan
+fp8_mixed_signs
+fp8_cancel

@@ -1,0 +1,25 @@
+[tasks]
+bmc
+cover
+
+[options]
+bmc: mode bmc
+bmc: depth 20
+cover: mode cover
+cover: depth 20
+
+[engines]
+smtbmc z3
+
+[script]
+read -formal pe.sv
+read -formal array.sv
+read -formal tile_top.sv
+read -formal tile_props.sv
+prep -top tile_formal
+
+[files]
+../rtl/pe.sv
+../rtl/array.sv
+../rtl/tile_top.sv
+tile_props.sv

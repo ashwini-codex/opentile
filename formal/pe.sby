@@ -1,0 +1,24 @@
+[tasks]
+bmc
+prove
+cover
+
+[options]
+bmc: mode bmc
+bmc: depth 20
+prove: mode prove
+prove: timeout 120
+cover: mode cover
+cover: depth 20
+
+[engines]
+smtbmc z3
+
+[script]
+read -formal pe.sv
+read -formal pe_props.sv
+prep -top pe_formal
+
+[files]
+../rtl/pe.sv
+pe_props.sv

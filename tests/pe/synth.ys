@@ -1,0 +1,5 @@
+# PE-only Yosys synth (O6 cell-count check). Run from repo root.
+read_verilog -sv rtl/pe.sv
+synth -top pe
+stat
+stat -width

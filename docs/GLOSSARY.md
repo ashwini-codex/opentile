@@ -1,0 +1,31 @@
+# Glossary (extend as terms appear; every term in plain words)
+- **PE** — processing element: one multiply-accumulate cell.
+- **Systolic array** — a grid of PEs where data moves one neighbour per cycle.
+- **Output-stationary** — each PE keeps the running sum of one output element; inputs move past it.
+- **Weight-stationary** — each PE keeps one B (weight) value for many cycles; A and partial sums move. OpenTile is not this.
+- **Skew** — delaying row i by i cycles and column j by j cycles so matching operands meet.
+- **Unskewed vector feed** — at feed cycle k the west edge is given column k of A and the north edge row k of B, with no extra delay at the pins; skew is inside the array.
+- **Feed cycle k** — index of the unskewed input vector, k = 0..K−1.
+- **Array cycle t** — clock cycle counted from the first feed, t = 0 at the first compute edge.
+- **Compute phase** — the K+R+C−2 cycles during which `en` is high and products land; last new product at t = K+R+C−3.
+- **Meet** — the cycle when A[i][k] and B[k][j] are both present at PE(i,j), t = i+j+k.
+- **Skew register** — the delay flop that holds a row or column back by one cycle relative to its neighbour.
+- **Wavefront** — the diagonal of PEs doing useful work at a given cycle.
+- **R, C, K** — array rows, array columns, and reduction length (shared inner dimension of A and B).
+- **K_MAX** — largest legal runtime K; sizes the scratchpad (64 in 1.0).
+- **wrap32** — map an integer into signed INT32 by modulo 2³²: `((x + 2³¹) mod 2³²) − 2³¹`.
+- **K_RANGE** — `err_code_o` bit 0: start with K = 0 or K > K_MAX; the start is rejected.
+- **Level-sampled** — a signal is read as its value on the clock edge, not as a 0→1 transition.
+- **Array cycle t** — clock cycle of COMPUTE counted from the first feed; t=0 is the first `en=1` edge. Stall (`en=0`) does not increment t in the trace file.
+- **Useful fraction** — K/(K+R+C−2): share of compute cycles in which a PE can do a new product from a live k.
+- **Accumulator** — the register holding a running sum (INT8: 32-bit wrap; E4M3: 43-bit fixed-point, LSB=2⁻¹⁸).
+- **E4M3** — 8-bit float: 1 sign, 4 exponent bits (bias 7), 3 mantissa; no infinities; NaN when E and M are all ones; max finite 448.
+- **RNE** — round to nearest, ties to even (IEEE 754 `roundTiesToEven`).
+- **Canonical NaN** — the single FP32 quiet NaN OpenTile emits: bits `0x7FC00000`.
+- **AXI-Stream** — valid/ready handshake streaming protocol; a transfer happens when both are high.
+- **TLAST** — marks the final beat of a packet.
+- **Back-pressure** — the receiver lowering ready to make the sender wait.
+- **Scoreboard** — testbench component comparing DUT results with expected values.
+- **Stand-in DUT** — behavioural design with the real ports; used to prove the testbench before RTL exists.
+- **Mutation testing** — injecting small bugs into the RTL to check the tests catch them.
+- **Verify / Validate** — built it right (against the spec) / built the right thing (against the intent).

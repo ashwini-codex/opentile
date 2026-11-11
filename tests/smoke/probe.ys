@@ -1,0 +1,5 @@
+# Acceptance probe of SV constructs used later (generate, signed, packed, always_ff).
+read_verilog -sv tests/smoke/probe_sv.sv
+hierarchy -check -top probe_sv
+synth -top probe_sv
+stat

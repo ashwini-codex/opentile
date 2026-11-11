@@ -1,0 +1,22 @@
+[tasks]
+bmc
+
+[options]
+bmc: mode bmc
+bmc: depth 20
+
+[engines]
+smtbmc z3
+
+[script]
+read -formal pe.sv
+read -formal array.sv
+read -formal tile_store_noready.sv
+read -formal tile_props.sv
+prep -top tile_formal
+
+[files]
+../rtl/pe.sv
+../rtl/array.sv
+../rtl/variants/tile_store_noready.sv
+tile_props.sv

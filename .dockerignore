@@ -1,0 +1,3 @@
+# Image does not COPY the repo; keep the build context tiny.
+*
+!Dockerfile

@@ -1,0 +1,15 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build pinned image
+        run: docker build -t opentile:dev -f Dockerfile .
+      - name: make versions
+        run: docker run --rm -v "$GITHUB_WORKSPACE":/work -w /work opentile:dev make versions IN_IMAGE=1
+      - name: make verify
+        run: docker run --rm -v "$GITHUB_WORKSPACE":/work -w /work opentile:dev make verify IN_IMAGE=1

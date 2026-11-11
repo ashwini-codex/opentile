@@ -1,0 +1,5 @@
+# Yosys synth of the 1-bit smoke register.
+read_verilog -sv tests/smoke/reg1.sv
+hierarchy -check -top reg1
+synth -top reg1
+stat

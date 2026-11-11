@@ -1,0 +1,13 @@
+[options]
+mode prove
+depth 8
+
+[engines]
+smtbmc z3
+
+[script]
+read -sv reg1.sv
+prep -top reg1
+
+[files]
+reg1.sv
